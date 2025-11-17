@@ -1,0 +1,2 @@
+# Socket_Programming_Project
+This project demonstrates a complete socket-programming implementation built using Python. It includes both server-side and client-side components that communicate over TCP sockets. The project is organized with proper version control using Git and GitHub from the beginning, enabling clean tracking of changes, collaborative development, and structured project management. Features include message transmission, connection handling, basic error handling, and expandable architecture for future enhancements.
