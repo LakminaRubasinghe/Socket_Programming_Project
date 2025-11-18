@@ -12,6 +12,10 @@ TCP_PORT = 9009
 UDP_PORT = 9010
 ENC = "utf-8"
 
+#Color themes
+
+
+
 class ChatClient:
     def __init__(self, root):
         self.root = root
