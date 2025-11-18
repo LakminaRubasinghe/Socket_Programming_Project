@@ -13,12 +13,12 @@ UDP_PORT = 9010
 ENC = "utf-8"
 
 #Color themes
-WHITE = "#FFFFFF"
-NAME = "#044343"
-BG_FRAME = "#F6F8D5"
-BG_MAIN = "#044343"
-BG_ENTRY = "#98D2C0"
-BG_BUTTON = "#4F959D"
+WHITE = "#E0E9F6"
+NAME = "#0D0D3B"
+BG_FRAME = "#FFFFFF"
+BG_MAIN = "#000047"
+BG_ENTRY = "#A1C6EA"
+BG_BUTTON = "#3E6680"
 BG_BUTTON_DISCONNECT = "#9C2007"
 BG_BUTTON_DISCONNECT_LIGHT = "#F87C63"
 FG_TEXT = "#181818"
@@ -30,7 +30,7 @@ FONT_BOLD = ("sans-serif ", 11, "bold")
 class ChatClient:
     def __init__(self, root):
         self.root = root
-        root.title("Socket Chat Client (TCP & UDP)")
+        root.title("Message Sharing (TCP & UDP)")
         root.configure(bg=BG_MAIN)
         root.geometry("600x540")
 
@@ -41,8 +41,8 @@ class ChatClient:
         # ---------- HEADER ----------
         tk.Label(
             frame,
-            text="Socket Chat Client",
-            font=("Segoe UI", 16, "bold"),
+            text="Client Interface",
+            font=("Segoe UI", 20, "bold"),
             fg=NAME,
             bg=BG_FRAME
         ).pack(pady=8)
