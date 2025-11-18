@@ -13,7 +13,14 @@ UDP_PORT = 9010
 ENC = "utf-8"
 
 #Color themes
-
+BG_MAIN = "#F6F8D5"
+BG_FRAME = "#205781"
+BG_ENTRY = "#98D2C0"
+BG_BUTTON = "#4F959D"
+FG_TEXT = "#F8E559"
+FG_PLACEHOLDER = "#F6ECA9"
+FONT_MAIN = ("Segoe UI", 11)
+FONT_BOLD = ("Segoe UI", 11, "bold")
 
 
 class ChatClient:
