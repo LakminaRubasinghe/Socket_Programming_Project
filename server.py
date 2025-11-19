@@ -105,8 +105,9 @@ class ChatServer:
     # ---------------- SERVER THREAD ----------------
     def server_thread(self):
         self.udp_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.udp_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
         self.udp_sock.bind((UDP_HOST, UDP_PORT))
-        self.log(f"[UDP] Listening on {UDP_HOST}:{UDP_PORT}")
+        self.log(f"[UDP] Listening on {UDP_HOST}:{UDP_PORT}\n")
 
         def udp_listener():
             while self.running:
@@ -115,9 +116,11 @@ class ChatServer:
                     text = data.decode(ENC).strip()
                     with udp_lock:
                         udp_clients.add(client)
-                    self.log(f"[UDP]{client} > {text}")
-                    self.broadcast_udp(f"[UDP_BROADCAST]{client} > {text}", exclude=client)
-                    self.broadcast_tcp(f"[UDP]{client} > {text}")
+
+                    self.log(f"[UDP]{client} > {text}\n")
+
+                    self.broadcast_udp(f"[UDP_BROADCAST]{client} > {text}\n", exclude=client)
+                    self.broadcast_tcp(f"[UDP]{client} > {text}\n")
                 except:
                     continue
 
@@ -127,7 +130,7 @@ class ChatServer:
         self.tcp_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.tcp_sock.bind((TCP_HOST, TCP_PORT))
         self.tcp_sock.listen(50)
-        self.log(f"[TCP] Listening on {TCP_HOST}:{TCP_PORT}")
+        self.log(f"[TCP] Listening on {TCP_HOST}:{TCP_PORT}\n")
 
         while self.running:
             try:
@@ -157,7 +160,7 @@ class ChatServer:
 
     # ---------------- TCP CLIENT HANDLER ----------------
     def handle_tcp_client(self, conn, addr):
-        self.log(f"[TCP] New connection from {addr}")
+        self.log(f"[TCP] New connection from {addr}\n")
         with tcp_lock:
             tcp_clients.append((conn, addr))
         try:
@@ -174,15 +177,15 @@ class ChatServer:
                         with udp_lock:
                             udp_clients.add((ip, port))
                         conn.sendall(f"Registered UDP {ip}:{port}\n".encode(ENC))
-                        self.log(f"[UDP] Registered {ip}:{port}")
+                        self.log(f"[UDP] Registered {ip}:{port}\n")
                     except Exception as e:
                         conn.sendall(f"ERR registering UDP: {e}\n".encode(ENC))
                     continue
                 # Broadcast
-                msg = f"[TCP]{addr} > {text}"
+                msg = f"[TCP]{addr} > {text}\n"
                 self.log(msg)
                 self.broadcast_tcp(msg)
-                self.broadcast_udp(f"[TCP_BROADCAST]{text}")
+                self.broadcast_udp(f"[TCP_BROADCAST]{text}\n")
         except:
             pass
         finally:
@@ -195,7 +198,7 @@ class ChatServer:
                 conn.close()
             except:
                 pass
-            self.log(f"[TCP] Connection closed: {addr}")
+            self.log(f"[TCP] Connection closed: {addr}\n")
 
 # ---------------- RUN GUI ----------------
 if __name__ == "__main__":
