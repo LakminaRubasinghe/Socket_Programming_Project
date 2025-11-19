@@ -282,7 +282,7 @@ class ChatClient:
             while self.running:
                 data, addr = self.udp_sock.recvfrom(4096)
                 text = data.decode(ENC)
-                self.append_text(f"{addr} (UDP) > {text}\n")
+                self.append_text(f"\n{addr} (UDP) > {text}\n")
         except Exception as e:
             self.append_text(f"[SYSTEM] UDP recv error (likely closed): {e}\n")
 
