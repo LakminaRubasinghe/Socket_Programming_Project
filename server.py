@@ -107,7 +107,7 @@ class ChatServer:
         self.udp_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.udp_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1) 
         self.udp_sock.bind((UDP_HOST, UDP_PORT))
-        self.log(f"[UDP] Listening on {UDP_HOST}:{UDP_PORT}\n")
+        self.log(f"[UDP] Listening on {UDP_HOST}:{UDP_PORT}")
 
         def udp_listener():
             while self.running:
@@ -160,7 +160,7 @@ class ChatServer:
 
     # ---------------- TCP CLIENT HANDLER ----------------
     def handle_tcp_client(self, conn, addr):
-        self.log(f"[TCP] New connection from {addr}\n")
+        self.log(f"[TCP] New connection from {addr}")
         with tcp_lock:
             tcp_clients.append((conn, addr))
         try:

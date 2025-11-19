@@ -10,7 +10,7 @@ from tkinter import simpledialog, messagebox
 SERVER_IP_DEFAULT = "127.0.0.1"
 TCP_PORT = 9009
 UDP_PORT = 9010
-ENC = "utf-8"
+ENC = "utf-8" 
 
 #Color themes
 WHITE = "#E0E9F6"
