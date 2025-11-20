@@ -1,6 +1,3 @@
-# client.py
-# Simple Tkinter chat client that can send via TCP or UDP
-# Python 3.8+
 import socket
 import threading
 import tkinter as tk
@@ -35,8 +32,15 @@ class ChatClient:
         root.geometry("600x540")
 
         # ---------- MAIN WRAPPER ----------
-        frame = tk.Frame(root, bg=BG_FRAME, bd=2, relief="groove")
-        frame.pack(padx=8, pady=8, fill="both", expand=True)
+        frame = tk.Frame(root, 
+                         bg=BG_FRAME, 
+                         bd=2, 
+                         relief="groove")
+        
+        frame.pack(padx=8, 
+                   pady=8, 
+                   fill="both", 
+                   expand=True)
 
         # ---------- HEADER ----------
         tk.Label(
@@ -52,10 +56,16 @@ class ChatClient:
         ipframe.pack(anchor="center" , pady=(5, 10))
         
 
-        tk.Label(ipframe, text="Server IP:", fg=FG_TEXT, bg=BG_FRAME, font=FONT_MAIN).pack(side="left")
+        tk.Label(ipframe, 
+                 text="Server IP:", 
+                 fg=FG_TEXT, 
+                 bg=BG_FRAME, 
+                 font=FONT_MAIN
+        ).pack(side="left")
 
         self.server_ip_var = tk.StringVar(value=SERVER_IP_DEFAULT)
 
+        #single-line text input
         tk.Entry(
             ipframe, 
             textvariable=self.server_ip_var, 
@@ -67,6 +77,7 @@ class ChatClient:
             insertbackground=WHITE
         ).pack(side="left", padx=8)
         
+        #connect button
         btn_connect = tk.Button(
             ipframe,
             text="Connect",
@@ -88,6 +99,7 @@ class ChatClient:
         btn_connect.bind("<Enter>", on_enter)
         btn_connect.bind("<Leave>", on_leave)
         
+        #disconnect button
         btn_disconnect = tk.Button(
             ipframe,
             text="Disconnect",
@@ -127,6 +139,7 @@ class ChatClient:
         msgframe = tk.Frame(frame, bg=BG_FRAME)
         msgframe.pack(anchor="center" )
 
+        #message input field
         self.msg_entry = tk.Entry(
             msgframe,
             width=45,
@@ -137,7 +150,7 @@ class ChatClient:
             insertbackground=WHITE)
         
         self.msg_entry.pack(side="left", padx=(0,6), pady=5, anchor="center" )
-        self.msg_entry.bind("<Return>", lambda e: self.send_tcp())
+        self.msg_entry.bind("<Return>", lambda e: self.send_tcp())  #use lambda e because Tkinter passes an event parameter.
 
         placeholder = "Type your message here..."
         self.msg_entry.insert(0, placeholder)
